@@ -20,7 +20,9 @@ Passwords are hashed, then the first 5 digits of the hash are sent to the haveib
 
 ## Arguments
 
-Running without arguments defaults to email checking
-Specifying -p or --password will prompt for a password
+Running without arguments defaults to email checking.
+
+Specifying -p or --password will prompt for a password.
+
 Use -s or --sha1 when you want to hash the password yourself. Just make sure a valid sha1 hash is passed to the program.
 
