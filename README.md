@@ -1,7 +1,7 @@
 # is-it-secure
 
-A python script for interacting with the https://haveibeenpwned.com API
-Run it with an email address as an argument and it will check for known breaches involving that email address
+A python script for interacting with the https://haveibeenpwned.com API.
+Run it with an email address as an argument and it will check for known breaches involving that email address.
 
 Specify -p and it will prompt you to enter a password. The password is never saved, but securely checked against a database of known passwords. 
 
