@@ -5,7 +5,7 @@ Run it with an email address as an argument and it will check for known breaches
 
 Specify -p and it will prompt you to enter a password. The password is never saved, but securely checked against a database of known passwords. 
 
-This script is pretty much just a front end to the haveibeenpwned.com api. All the heavy lifting was already done over there, so check them out.
+This script is pretty much just a front end to the https://haveibeenpwned.com api. All the heavy lifting was already done over there, so check them out.
 
 
 ## Running it
