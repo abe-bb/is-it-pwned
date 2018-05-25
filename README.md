@@ -1,11 +1,11 @@
 # is-it-secure
 
-A python script for interacting with the https://haveibeenpwned.com API
-Run it with an email address as an argument and it will check for known breaches involving that email address
+A python script for interacting with the https://haveibeenpwned.com API.
+Run it with an email address as an argument and it will check for known breaches involving that email address.
 
 Specify -p and it will prompt you to enter a password. The password is never saved, but securely checked against a database of known passwords. 
 
-This script is pretty much just a front end to the haveibeenpwned.com api. All the heavy lifting was already done over there, so check them out.
+This script is pretty much just a front end to the https://haveibeenpwned.com api. All the heavy lifting was already done over there, so check them out.
 
 
 ## Running it
@@ -20,7 +20,9 @@ Passwords are hashed, then the first 5 digits of the hash are sent to the haveib
 
 ## Arguments
 
-Running without arguments defaults to email checking
-Specifying -p or --password will prompt for a password
+Running without arguments defaults to email checking.
+
+Specifying -p or --password will prompt for a password.
+
 Use -s or --sha1 when you want to hash the password yourself. Just make sure a valid sha1 hash is passed to the program.
 
