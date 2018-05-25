@@ -15,7 +15,7 @@ def parseArgs():
                                                  "around the web. When called with no optional arguments, defaults"
                                                  "to checking email addresses. Uses the haveibeenpwned.com database"
                                                  "and uses the range API request for security.")
-    parser.add_argument("emailOrHash", nargs='?', help="The input, whether password, sha1 sum, or email. Default: email")
+    parser.add_argument("emailOrHash", nargs='?', help="The input, either sha1 sum, or email. Default: email")
     parser.add_argument("-s", "--sha1", help="Treat given input as sha1 sum and check accordingly",
                         action="store_true")
     parser.add_argument("-p", "--password", help="Prompt for password, hash it, and securely check if it has been aquired"
