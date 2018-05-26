@@ -75,10 +75,10 @@ def makeHashAPICall(hash):
     if found > 0:
         if found == 1:
             linesToPrint = ["\nWARNING", "THIS PASSWORD HAS BEEN EXPOSED IN A SECURITY BREACH.",
-                            "It should never be used"]
+                            "It probably shouldn't be used"]
         else:
             linesToPrint = ["\nWARNING", "THIS PASSWORD HAS BEEN SEEN IN " + str(found) + " SECURITY BREACHES",
-                            "It should never be used"]
+                            "It probably shouldn't be used"]
     else:
         linesToPrint = ["\nLooking good so far :)", "This doesn't mean you are done...", "Just be smart with your passwords"]
 
@@ -89,34 +89,35 @@ def makeEmailAPICall(userInput):
     linesToPrint = []
     request = urllib.request.Request("https://haveibeenpwned.com/api/v2/breachedaccount/" + userInput + "?truncateResponse=true&includeUnverified=true", data=None,
                                      headers={"User-Agent": "Python-Pwnage_check-for-friends-and-fam"})
-    response = urllib.request.urlopen(request)
-    bodytext = json.loads(response.read())
-    print(bodytext)
-
-    # This try/except block makes the validEmail api call and interprets the response
     try:
-        if len(bodytext) == 1:
-            linesToPrint.append("\nWARNING")
-            linesToPrint.append("There is one known security breach associated with this email address.")
-            linesToPrint.append("If this is news to you, you should probably change and check your passwords\n")
-            linesToPrint.append("Your account is associated with the following breached site:")
-            linesToPrint.append(bodytext[0]["Name"])
-        else:
-            linesToPrint.append("\nWARNING")
-            linesToPrint.append("There are " + str(len(bodytext)) + " known security breaches associated with this email address.")
-            linesToPrint.append("If this is news to you, you should probably change and check your passwords\n")
-            linesToPrint.append("Your account is associated with the following breached sites:")
-            for i in bodytext:
-                linesToPrint.append(i["Name"])
+        response = urllib.request.urlopen(request)
     except urllib.error.HTTPError as e:
         if e.code == 429:
             linesToPrint.append("Too many requests too fast. Please wait a few seconds and try again.")
             exit(1)
         elif e.code == 404:
             linesToPrint.append("Congratulations!!")
-            linesToPrint.append("No known security breaches associated with your email address :):)")
+            linesToPrint.append("No security breaches associated with your email address were found  :):)")
+            return linesToPrint
         else:
             raise e
+    bodytext = json.loads(response.read())
+
+    # This try/except block makes the validEmail api call and interprets the response
+    if len(bodytext) == 1:
+        linesToPrint.append("\nWARNING")
+        linesToPrint.append("There is one known security breach associated with this email address.")
+        linesToPrint.append("If this is news to you, you should probably change and check your passwords\n")
+        linesToPrint.append("Your account is associated with the following breached site:")
+        linesToPrint.append(bodytext[0]["Name"])
+    else:
+        linesToPrint.append("\nWARNING")
+        linesToPrint.append("There are " + str(len(bodytext)) + " known security breaches associated with this email address.")
+        linesToPrint.append("If this is news to you, you should probably change and check your passwords\n")
+        linesToPrint.append("Your account is associated with the following breached sites:")
+        for i in bodytext:
+            linesToPrint.append(i["Name"])
+
 
     return linesToPrint
 
