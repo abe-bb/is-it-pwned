@@ -23,7 +23,7 @@ def parseArgs():
     args = parser.parse_args()
 
     # Sha1 error Checking
-    if args.sha1:
+    if args.sha1 and not args.emailOrHash is None:
         invalidCharacters = re.compile('[g-zG-Z]')
         if invalidCharacters.match(args.emailOrHash):
             print("Not a valid sha1 hash.")
@@ -43,6 +43,7 @@ def parseArgs():
             exit(1)
     return args
 
+
 # Prompts user for password and returns the SHA1 sum of it
 def hashPassword():
     password = getpass.getpass().encode("utf-8")
@@ -52,8 +53,8 @@ def hashPassword():
         exit(1)
     toHash = hashlib.sha1()
     toHash.update(password)
-    hash = toHash.hexdigest()
-    return hash.lower()
+    passwordHash = toHash.hexdigest()
+    return passwordHash.lower()
 
 #     Takes a string, calls the haveibeenpwned hash range search, interprets it, and returns a list of lines to be
 # printed
