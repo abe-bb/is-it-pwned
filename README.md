@@ -20,7 +20,9 @@ Passwords are hashed, then the first 5 digits of the hash are sent to the haveib
 
 ## Arguments
 
-Running without arguments defaults to email checking.
+Specify email address as first argument to check for security breaches associated with accounts tied that email address.
+
+-h prints a help summary.
 
 Specifying -p or --password will prompt for a password.
 
