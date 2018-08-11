@@ -20,7 +20,7 @@ Passwords are hashed, then the first 5 digits of the hash are sent to the haveib
 
 ## Arguments
 
-Specify email address as first argument to check for security breaches associated with accounts tied that email address.
+Specify email address as first argument to check for security breaches associated with accounts tied to that email address.
 
 -h prints a help summary.
 
