@@ -1,4 +1,4 @@
-# is-it-secure
+# security-check
 
 A python script for interacting with the https://haveibeenpwned.com API.
 Run it with an email address as an argument and it will check for known breaches involving that email address.
