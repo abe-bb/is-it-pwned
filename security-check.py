@@ -97,7 +97,7 @@ def makeEmailAPICall(userInput):
             linesToPrint.append("Too many requests too fast. Please wait a few seconds and try again.")
             exit(1)
         elif e.code == 404:
-            linesToPrint.append("Congratulations!!")
+            linesToPrint.append("\nCongratulations!!")
             linesToPrint.append("No security breaches associated with your email address were found  :):)")
             return linesToPrint
         else:
