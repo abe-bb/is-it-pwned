@@ -62,7 +62,7 @@ def makeHashAPICall(hash):
     linesToPrint = []
     found = 0
     request = urllib.request.Request("https://api.pwnedpasswords.com/range/" + hash[:5], data=None,
-                                     headers={"User-Agent": "Python-Pwnage_check-for-friends-and-fam"})
+                                     headers={"User-Agent": "Python-Pwnage_check-for-friends-and-fami https://github.com/abramjc/is-it-pwned"})
     response = urllib.request.urlopen(request)
     bodytext = response.read().decode()
     listOfLines = bodytext.split('\r\n')
@@ -89,7 +89,7 @@ def makeHashAPICall(hash):
 def makeEmailAPICall(userInput):
     linesToPrint = []
     request = urllib.request.Request("https://haveibeenpwned.com/api/v2/breachedaccount/" + userInput + "?truncateResponse=true&includeUnverified=true", data=None,
-                                     headers={"User-Agent": "Python-Pwnage_check-for-friends-and-fam"})
+                                     headers={"User-Agent": "Python-Pwnage_check-for-friends-and-fam https://github.com/abramjc/is-it-pwned"})
     try:
         response = urllib.request.urlopen(request)
     except urllib.error.HTTPError as e:
