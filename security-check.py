@@ -102,7 +102,7 @@ def makeEmailAPICall(userInput):
             return linesToPrint
         else:
             raise e
-    bodytext = json.loads(response.read())
+    bodytext = json.loads(response.read().decode('utf-8'))
 
     # This try/except block makes the validEmail api call and interprets the response
     if len(bodytext) == 1:
