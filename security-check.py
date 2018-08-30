@@ -19,7 +19,7 @@ def parseArgs():
     parser.add_argument("-s", "--sha1", help="Treat given input as sha1 sum and check accordingly",
                         action="store_true")
     parser.add_argument("-p", "--password", help="Prompt for password, hash it, and securely check if it has been aquired"
-                                                 "in any known attacks", action="store_true")
+                                                 " in any known attacks", action="store_true")
     args = parser.parse_args()
 
     # Sha1 error Checking
@@ -81,7 +81,7 @@ def makeHashAPICall(hash):
             linesToPrint = ["\nWARNING", "THIS PASSWORD HAS BEEN SEEN IN " + str(found) + " SECURITY BREACHES",
                             "It probably shouldn't be used"]
     else:
-        linesToPrint = ["\nLooking good so far :)", "This doesn't mean you are done...", "Just be smart with your passwords"]
+        linesToPrint = ["\nNo breaches found :)", "Always be smart with your passwords"]
 
     return linesToPrint
 
