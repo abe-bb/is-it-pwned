@@ -74,11 +74,11 @@ def makeHashAPICall(hash):
 
     if found > 0:
         if found == 1:
-            linesToPrint = ["1 security breach found containing this password"]
+            linesToPrint = ["\n1 security breach found containing this password"]
         else:
-            linesToPrint = [str(found) + " security breaches found containing this password"]
+            linesToPrint = ["\n" + str(found) + " security breaches found containing this password"]
     else:
-        linesToPrint = ["No security breaches found"]
+        linesToPrint = ["\nNo security breaches found"]
 
     return linesToPrint
 
@@ -95,7 +95,7 @@ def makeEmailAPICall(userInput):
             linesToPrint.append("Too many requests too fast. Please wait a few seconds and try again.")
             exit(1)
         elif e.code == 404:
-            linesToPrint.append("No security breaches associated with this email address were found")
+            linesToPrint.append("\nNo security breaches associated with this email address were found")
             return linesToPrint
         else:
             raise e
@@ -103,12 +103,12 @@ def makeEmailAPICall(userInput):
 
     # This try/except block makes the validEmail api call and interprets the response
     if len(bodytext) == 1:
-        linesToPrint.append("There is one known security breach associated with this email address.")
+        linesToPrint.append("\nThere is one known security breach associated with this email address.")
         linesToPrint.append("If this is news to you, you should probably change and check your passwords\n")
         linesToPrint.append("Your account is associated with the following breached site:")
         linesToPrint.append(bodytext[0]["Name"])
     else:
-        linesToPrint.append("There are " + str(len(bodytext)) + " known security breaches associated with this email address.")
+        linesToPrint.append("\nThere are " + str(len(bodytext)) + " known security breaches associated with this email address.")
         linesToPrint.append("If this is news to you, you should probably change and check your passwords\n")
         linesToPrint.append("Your account is associated with the following breached sites:")
         for i in bodytext:
