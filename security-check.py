@@ -26,8 +26,7 @@ def parseArgs():
     if args.sha1 and not args.emailOrHash is None:
         invalidCharacters = re.compile('[g-zG-Z]')
         if invalidCharacters.match(args.emailOrHash):
-            print("Not a valid sha1 hash.")
-            print("Is it in hexadecimal?")
+            print("Not a valid sha1 hash")
             exit(1)
         elif len(args.emailOrHash) != 40:
             print("Not a valid sha1 hash")
@@ -75,21 +74,20 @@ def makeHashAPICall(hash):
 
     if found > 0:
         if found == 1:
-            linesToPrint = ["\nWARNING", "THIS PASSWORD HAS BEEN EXPOSED IN A SECURITY BREACH.",
-                            "It probably shouldn't be used"]
+            linesToPrint = ["1 security breach found containing this password"]
         else:
-            linesToPrint = ["\nWARNING", "THIS PASSWORD HAS BEEN SEEN IN " + str(found) + " SECURITY BREACHES",
-                            "It probably shouldn't be used"]
+            linesToPrint = [str(found) + " security breaches found containing this password"]
     else:
-        linesToPrint = ["\nNo breaches found :)", "Always be smart with your passwords"]
+        linesToPrint = ["No security breaches found"]
 
     return linesToPrint
 
 #     Takes a string, calls the haveibeenpwned api, interprets it and returns a list of lines to printed
 def makeEmailAPICall(userInput):
     linesToPrint = []
-    request = urllib.request.Request("https://haveibeenpwned.com/api/v2/breachedaccount/" + userInput + "?truncateResponse=true&includeUnverified=true", data=None,
-                                     headers={"User-Agent": "Python-Pwnage_check-for-friends-and-fam https://github.com/abramjc/is-it-pwned"})
+    url = "https://haveibeenpwned.com/api/v2/breachedaccount/" + userInput + "?truncateResponse=true&includeUnverified=true"
+    request = urllib.request.Request(url, data=None,
+                                     headers={"User-Agent": "friendly-python-script"})
     try:
         response = urllib.request.urlopen(request)
     except urllib.error.HTTPError as e:
@@ -97,8 +95,7 @@ def makeEmailAPICall(userInput):
             linesToPrint.append("Too many requests too fast. Please wait a few seconds and try again.")
             exit(1)
         elif e.code == 404:
-            linesToPrint.append("\nCongratulations!!")
-            linesToPrint.append("No security breaches associated with your email address were found  :):)")
+            linesToPrint.append("No security breaches associated with this email address were found")
             return linesToPrint
         else:
             raise e
@@ -106,13 +103,11 @@ def makeEmailAPICall(userInput):
 
     # This try/except block makes the validEmail api call and interprets the response
     if len(bodytext) == 1:
-        linesToPrint.append("\nWARNING")
         linesToPrint.append("There is one known security breach associated with this email address.")
         linesToPrint.append("If this is news to you, you should probably change and check your passwords\n")
         linesToPrint.append("Your account is associated with the following breached site:")
         linesToPrint.append(bodytext[0]["Name"])
     else:
-        linesToPrint.append("\nWARNING")
         linesToPrint.append("There are " + str(len(bodytext)) + " known security breaches associated with this email address.")
         linesToPrint.append("If this is news to you, you should probably change and check your passwords\n")
         linesToPrint.append("Your account is associated with the following breached sites:")
